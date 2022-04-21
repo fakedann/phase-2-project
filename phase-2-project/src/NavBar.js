@@ -6,7 +6,8 @@ import { NavLink } from "react-router-dom";
 
 function NavBar(){
   return (
-    <Navbar bg="myColor" variant="light">
+    <div id="navnav">
+      <Navbar bg="myColor" variant="light">
       <Container>
       <Nav className="me-auto">
         <LinkContainer to="/">
@@ -21,7 +22,7 @@ function NavBar(){
       </Nav>
       </Container>
   </Navbar>
-
+    </div>
   )
 }
 
