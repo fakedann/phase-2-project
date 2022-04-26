@@ -11,12 +11,32 @@ html {
   background-color: #F4F1DE;
 }
 
-#title {
+.title {
   padding-top: 25px;
 }
+
 .card {
   margin: auto;
   width: auto;
+}
+
+.card-img-top{
+  width: 250px;
+  height: 250px;
+}
+
+.border-dark{
+  margin-bottom: 35px;
+}
+
+.ranking{
+  font-weight: bold;
+}
+
+#expBtn{
+  background-color: #3D405B;
+  border-color: #3D405B;
+  width: 120px;
 }
 
 #books {
@@ -45,4 +65,34 @@ html {
 
 .list-group {
   border-color: blue;
+}
+
+#search-list{
+  width: 900px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+  background-color: white;
+}
+
+.search-item{
+  background-color: white;
+  padding: 2rem;
+  margin: 1rem;
+}
+
+.radio{
+  margin-top: 20px;
+  text-align: center;
+}
+
+label, input{
+  margin-right: 20px;
+  margin-left: 30px;;
+}
+
+#srchBar{
+  width: 450px;
 }
