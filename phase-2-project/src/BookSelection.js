@@ -6,19 +6,52 @@ import ModalTitle from 'react-bootstrap/ModalTitle'
 import ModalBody from 'react-bootstrap/ModalBody'
 import ModalFooter from 'react-bootstrap/ModalFooter'
 import Button from 'react-bootstrap/Button'
+import Table from 'react-bootstrap/Table'
 
 function BookSelection(){
 
   const [searchData, setSearch] = useState('')
   const [checkedStatus, setChecked] = useState('date')
   const [results, setResults] = useState([])
-  const displayedCards = results.map( bookObj => <CardItem key={bookObj.title} book={bookObj}/>)
+  // const displayedCards = results.map( bookObj => <CardItem key={bookObj.title} book={bookObj}/>)
 
   const [show, setShow] = useState(false);
   const [condModal, setModal] = useState(true)
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const table = <Table striped bordered hover>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Username</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td colSpan={2}>Larry the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</Table>
+
+  console.log(results)
   
 
 
@@ -36,6 +69,7 @@ function BookSelection(){
           } 
         } )
         .then( data => {
+          console.log(data)
           setModal(true)
           setShow(handleShow)
           setTimeout(() => {
@@ -53,6 +87,35 @@ function BookSelection(){
         console.error(e)
       }
       
+    } else{
+      try{
+        fetch(`https://api.nytimes.com/svc/books/v3/lists/best-sellers/history.json?${checkedStatus}=${searchData}&api-key=VCLxI1f0Mv8l1IhdYJsSjWdpKAmryPV7`)
+        .then( data => {
+          if(data.ok){
+            return data.json();
+          }  
+          else{
+            throw new Error("Status code error :" + data.status)
+          } 
+        } )
+        .then( data => {
+          console.log(data)
+          setModal(true)
+          setShow(handleShow)
+          setTimeout(() => {
+            handleClose()
+          }, 1000);
+          setResults(data.results)
+          
+        } )
+        .catch( (err) => {
+          console.log(err)
+          setModal(false)
+          setShow(handleShow)
+        })
+      } catch(e){
+        console.error(e)
+      }
     }
   }
 
@@ -102,7 +165,8 @@ function BookSelection(){
             </Modal.Footer>
           </Modal>
 
-          {displayedCards}
+          {/* {displayedCards} */}
+          {results.length > 0 ? table: null}
           </div>
         </div>
       </div>
