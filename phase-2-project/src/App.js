@@ -24,7 +24,7 @@ function App() {
         setLoading(false);
       });
   }, []);
-  console.log(books)
+  // console.log(books)
 
   return (
     <div className="App">

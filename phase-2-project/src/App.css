@@ -26,6 +26,7 @@ html {
 }
 
 .border-dark{
+  margin-top: 20px;
   margin-bottom: 35px;
 }
 
@@ -95,4 +96,12 @@ label, input{
 
 #srchBar{
   width: 450px;
+}
+
+.modal-body {
+  text-align: center;
+}
+
+.modal-footer{
+  margin: 0 auto
 }

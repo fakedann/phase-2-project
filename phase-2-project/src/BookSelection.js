@@ -1,20 +1,64 @@
 import React, { useState } from "react";
+import CardItem from "./CardItem";
+import Modal from 'react-bootstrap/Modal'
+import ModalHeader from 'react-bootstrap/ModalHeader'
+import ModalTitle from 'react-bootstrap/ModalTitle'
+import ModalBody from 'react-bootstrap/ModalBody'
+import ModalFooter from 'react-bootstrap/ModalFooter'
+import Button from 'react-bootstrap/Button'
 
 function BookSelection(){
 
   const [searchData, setSearch] = useState('')
   const [checkedStatus, setChecked] = useState('date')
+  const [results, setResults] = useState([])
+  const displayedCards = results.map( bookObj => <CardItem key={bookObj.title} book={bookObj}/>)
+
+  const [show, setShow] = useState(false);
+  const [condModal, setModal] = useState(true)
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  
 
 
   function handleSubmit(e){
     e.preventDefault()
-    console.log(searchData)
+    if(checkedStatus === 'date'){
+      try{
+        fetch(`https://api.nytimes.com/svc/books/v3/lists/${searchData}/hardcover-fiction.json?api-key=VCLxI1f0Mv8l1IhdYJsSjWdpKAmryPV7`)
+        .then( data => {
+          if(data.ok){
+            return data.json();
+          }  
+          else{
+            throw new Error("Status code error :" + data.status)
+          } 
+        } )
+        .then( data => {
+          setModal(true)
+          setShow(handleShow)
+          setTimeout(() => {
+            handleClose()
+          }, 1000);
+          setResults(data.results.books)
+          
+        } )
+        .catch( (err) => {
+          console.log(err)
+          setModal(false)
+          setShow(handleShow)
+        })
+      } catch(e){
+        console.error(e)
+      }
+      
+    }
   }
 
   function handleChange(e){
     setChecked(e.target.value)
   }
-  console.log(checkedStatus)
 
   return (
 
@@ -39,7 +83,26 @@ function BookSelection(){
             </div>
            
           </form>
+              <Modal
+            show={show}
+            onHide={handleClose}
+            backdrop="static"
+            keyboard={false}
+          >
+            <Modal.Header closeButton>
+              <Modal.Title>Notification!</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              {condModal ? 'Success!' :'Invalid input. Please, try again.'}
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
 
+          {displayedCards}
           </div>
         </div>
       </div>
