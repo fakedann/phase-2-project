@@ -14,6 +14,7 @@ function BookSelection(){
   const [checkedStatus, setChecked] = useState('date')
   const [results, setResults] = useState([])
   // const displayedCards = results.map( bookObj => <CardItem key={bookObj.title} book={bookObj}/>)
+  const tableResults = results?.map( (tableObj, index) => <tr key={index}><td>{index}</td><td>{tableObj.author}</td><td>{tableObj.title}</td><td>{tableObj.publisher}</td><td>{tableObj.description}</td></tr>)
 
   const [show, setShow] = useState(false);
   const [condModal, setModal] = useState(true)
@@ -25,33 +26,16 @@ function BookSelection(){
   <thead>
     <tr>
       <th>#</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Username</th>
+      <th>Author</th>
+      <th>Title</th>
+      <th>Publisher</th>
+      <th>Description</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>1</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td colSpan={2}>Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
+    {tableResults}
   </tbody>
 </Table>
-
-  console.log(results)
   
 
 
@@ -70,6 +54,7 @@ function BookSelection(){
         } )
         .then( data => {
           console.log(data)
+          console.log(results)
           setModal(true)
           setShow(handleShow)
           setTimeout(() => {
@@ -100,6 +85,7 @@ function BookSelection(){
         } )
         .then( data => {
           console.log(data)
+          console.log(data.results[0].isbns[0].isbn10)
           setModal(true)
           setShow(handleShow)
           setTimeout(() => {
@@ -165,8 +151,8 @@ function BookSelection(){
             </Modal.Footer>
           </Modal>
 
-          {/* {displayedCards} */}
-          {results.length > 0 ? table: null}
+
+          {checkedStatus === 'date' ? null: table}
           </div>
         </div>
       </div>
