@@ -109,3 +109,35 @@ label, input{
 .table {
   margin-top: 35px;
 }
+
+.btn-warning{
+  font-size: 15px;
+  width: 100px;
+  height: 60px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  background-color: #DDD;
+  color: #999;
+}
+
+.myBtns{
+  background-color: #E07A5F;
+  font-size: 15px;
+  width: 100px;
+  height: 60px;
+  border-radius: 8px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  /* background-color: #DDD;
+  color: #999; */
+}
+
+.btnClicked{
+  font-size: 15px;
+  width: 100px;
+  height: 60px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  background-color: #DDD;
+  color: #999;
+}
