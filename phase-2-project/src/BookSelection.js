@@ -111,7 +111,7 @@ function BookSelection(){
           </Modal>
 
 
-          {results.type === '' ? null: (results.type === 'card' ? results.items.map( bookObj => <CardItem key={bookObj.title} book={bookObj}/>): <TableItem results={results}/>)}
+          {results.type === '' ? null: (results.type === 'card' ? results.items.map( bookObj => <CardItem key={bookObj.title} book={bookObj} results={results}/>): <TableItem results={results}/>)}
           </div>
         </div>
       </div>

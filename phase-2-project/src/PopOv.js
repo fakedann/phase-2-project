@@ -2,15 +2,17 @@ import React, { useState } from "react";
 import Popover from 'react-bootstrap/Popover'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Button from 'react-bootstrap/Button'
+import ListGroupItem from 'react-bootstrap/ListGroupItem'
 
 function PopOv({results}){
 
   const [btnSrch, setBtn] = useState('')
   const [btnStates, setStates] = useState([])
+  // console.log(btnStates)
 
   const popover = (
     <Popover id="popover-basic">
-      <Popover.Header as="h3">Tell us more about how you feel:</Popover.Header>
+      <Popover.Header as="h3">Tell us about your experience:</Popover.Header>
       <Popover.Body>
         <button className="myBtns" onClick={handleBtnClick} variant="warning">Have Read</button>
         <button className="myBtns" onClick={handleBtnClick}  variant="warning">Will Read</button>
@@ -29,6 +31,10 @@ function PopOv({results}){
   <Button variant="success">Add to database</Button>
 </OverlayTrigger></td></tr>)
 
+  const cardResult = <ListGroupItem><OverlayTrigger trigger="click" placement="right" overlay={popover}>
+  <Button variant="success">Add to database</Button>
+</OverlayTrigger></ListGroupItem>
+
   function handleBtnClick(e) {
   
     if(e.target.className === "myBtns"){
@@ -46,7 +52,7 @@ function PopOv({results}){
     console.log('submitted')
   }
 
-  return tableResults
+  return results.type === 'card' ? cardResult: tableResults
 }
 
 export default PopOv
