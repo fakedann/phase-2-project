@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Button from 'react-bootstrap/Button'
 import CardItem from "./CardItem";
+import Modal from 'react-bootstrap/Modal'
 
 function Home({books, loading}){
 
   const [expand, setExpand] = useState(false)
-  const displayedCards = books.map( bookObj => <CardItem key={bookObj.title} book={bookObj}/>)
+  const displayedCards = books.items.map( bookObj => <CardItem key={bookObj.title} book={bookObj} results={books} callModal={callModal}/>)
   const topFiveBooks = []
+
+  const [show, setShow] = useState(false);
+  const [condModal, setModal] = useState(true)
+
   for(let i=0; i<5; i++){
     topFiveBooks.push(displayedCards[i])
   }
@@ -18,6 +23,14 @@ function Home({books, loading}){
       e.target.innerText = "Expand"
     }
     setExpand(!expand)
+  }
+
+  function callModal(resp){
+    setShow(resp)
+    setModal(resp)
+    setTimeout(() => {
+      setShow(false)
+    }, 500);
   }
  
 
@@ -49,6 +62,24 @@ function Home({books, loading}){
           <div className="book-item">
             {expand ? displayedCards: topFiveBooks}
             <Button id="expBtn" onClick={handleClick} variant="success">Expand</Button>{' '}
+            {<Modal
+            show={show}
+            onHide={() => setShow(false)}
+            backdrop="static"
+            keyboard={false}
+          >
+            <Modal.Header closeButton>
+              <Modal.Title>Notification!</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              {condModal ? 'Success!' :'Invalid input. Please, try again.'}
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={() => setShow(false)}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>}
           </div>
         </div>
       </div>

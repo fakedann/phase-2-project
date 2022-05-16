@@ -9,14 +9,17 @@ import ReviewForm from './ReviewForm';
 
 function App() {
 
-  const [books, setBooks] = useState([])
+  const [books, setBooks] = useState({
+    type: '',
+    items: []
+  })
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
     fetch(`https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=VCLxI1f0Mv8l1IhdYJsSjWdpKAmryPV7`)
       .then( data => data.json())
-      .then( d => setBooks(d.results.books) )
+      .then( d => setBooks({['type']: 'card', ['items']: [...d.results.books]}) )
       .catch((err) => {
         console.log(err);
       })

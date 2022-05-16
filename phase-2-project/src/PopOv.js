@@ -4,7 +4,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Button from 'react-bootstrap/Button'
 import ListGroupItem from 'react-bootstrap/ListGroupItem'
 
-function PopOv({results}){
+function PopOv({results, callModal}){
 
   const [btnSrch, setBtn] = useState('')
   const [btnStates, setStates] = useState([])
@@ -37,9 +37,6 @@ function PopOv({results}){
 // </OverlayTrigger></td></tr>)
 //   }
 
-
-
-
   function handleBtnClick(e) {
   
     if(e.target.className === "myBtns"){
@@ -60,7 +57,7 @@ function PopOv({results}){
       body: JSON.stringify({user: btnSrch, interactions: btnStates, comments: ''})
     })
       .then( r => r.json())
-      .then( r => console.log(r))
+      .then( r => callModal(true))
     // fetch(`https://evening-temple-49691.herokuapp.com/toys/11`, {
     //   method: "DELETE"
     // })

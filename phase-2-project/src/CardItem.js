@@ -4,7 +4,7 @@ import ListGroup from 'react-bootstrap/ListGroup'
 import ListGroupItem from 'react-bootstrap/ListGroupItem'
 import PopOv from "./PopOv";
 
-function CardItem({book, results}){
+function CardItem({book, results, callModal}){
   return <Card border="dark" style={{ width: '18rem' }}>
           <Card.Img variant="top" src={ book['book_image'] ? book['book_image']: require("./book.jpeg")} alt="Card Image"/>
           <Card.Body>
@@ -17,7 +17,7 @@ function CardItem({book, results}){
             <ListGroupItem>Author: {book.author}</ListGroupItem>
             <ListGroupItem>Publisher: {book.publisher}</ListGroupItem>
             <ListGroupItem className="ranking">Rank: #{book.rank}</ListGroupItem>
-            <PopOv results={results}/>
+            <PopOv results={results} callModal={callModal}/>
           </ListGroup>
         </Card> 
 }

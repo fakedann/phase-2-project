@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Table from 'react-bootstrap/Table'
 import PopOv from "./PopOv";
 
-function TableItem({results}){
+function TableItem({results, callModal}){
 
   return (
   <Table striped bordered hover>
@@ -16,7 +16,7 @@ function TableItem({results}){
       </tr>
     </thead>
     <tbody>
-      <PopOv results={results}/>
+      <PopOv results={results} callModal={callModal}/>
     </tbody>
   </Table>
   )

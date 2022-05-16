@@ -36,7 +36,7 @@ function BookSelection(){
           setResults({['type']: 'card', ['items']: [...data.results.books]})
           setTimeout(() => {
             setShow(false)
-          }, 1000);
+          }, 500);
           
           
         } )
@@ -68,7 +68,7 @@ function BookSelection(){
           setResults({['type']: 'table', ['items']: [...data.results]})
           setTimeout(() => {
             setShow(false)
-          }, 1000);
+          }, 500);
           
         } )
         .catch( (err) => {
@@ -80,6 +80,14 @@ function BookSelection(){
         console.error(e)
       }
     }
+  }
+
+  function callModal(resp){
+    setShow(resp)
+    setModal(resp)
+    setTimeout(() => {
+      setShow(false)
+    }, 500);
   }
 
   return (
@@ -111,7 +119,7 @@ function BookSelection(){
           </Modal>
 
 
-          {results.type === '' ? null: (results.type === 'card' ? results.items.map( bookObj => <CardItem key={bookObj.title} book={bookObj} results={results}/>): <TableItem results={results}/>)}
+          {results.type === '' ? null: (results.type === 'card' ? results.items.map( bookObj => <CardItem key={bookObj.title} book={bookObj} results={results} callModal={callModal}/>): <TableItem results={results} callModal={callModal}/>)}
           </div>
         </div>
       </div>

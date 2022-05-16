@@ -14,10 +14,10 @@ function NavBar(){
           <Nav.Link>Home</Nav.Link>
         </LinkContainer>
         <LinkContainer to="/book-selection">
-          <Nav.Link>Book Selection</Nav.Link>
+          <Nav.Link>NYT's Search</Nav.Link>
         </LinkContainer>
         <LinkContainer to="/review-book">
-          <Nav.Link>Review a Book</Nav.Link>
+          <Nav.Link>DISCOVER/ACTIVITY</Nav.Link>
         </LinkContainer>
       </Nav>
       </Container>
