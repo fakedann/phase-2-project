@@ -27,13 +27,18 @@ function PopOv({results}){
     </Popover>
   );
 
-  const tableResults = results.items.map( (tableObj, index) => <tr key={index}><td>{index}</td><td>{tableObj.author}</td><td>{tableObj.title}</td><td>{tableObj.publisher}</td><td>{tableObj.description}</td><td><OverlayTrigger trigger="click" placement="right" overlay={popover}>
-  <Button variant="success">Add to database</Button>
-</OverlayTrigger></td></tr>)
+//   if(results.type === 'card'){
+//     const cardResult = <ListGroupItem><OverlayTrigger trigger="click" placement="right" overlay={popover}>
+//   <Button variant="success">Add to database</Button>
+//   </OverlayTrigger></ListGroupItem>
+//   }else{
+//     const tableResults = results.items.map( (tableObj, index) => <tr key={index}><td>{index}</td><td>{tableObj.author}</td><td>{tableObj.title}</td><td>{tableObj.publisher}</td><td>{tableObj.description}</td><td><OverlayTrigger trigger="click" placement="right" overlay={popover}>
+//   <Button variant="success">Add to database</Button>
+// </OverlayTrigger></td></tr>)
+//   }
 
-  const cardResult = <ListGroupItem><OverlayTrigger trigger="click" placement="right" overlay={popover}>
-  <Button variant="success">Add to database</Button>
-</OverlayTrigger></ListGroupItem>
+
+
 
   function handleBtnClick(e) {
   
@@ -49,10 +54,31 @@ function PopOv({results}){
   
   function handleBtnSubmit(e) {
     e.preventDefault()
+    fetch('https://evening-temple-49691.herokuapp.com/toys', {
+      method: "POST",
+      headers: {"Content-Type": "application/json" },
+      body: JSON.stringify({user: btnSrch, interactions: btnStates, comments: ''})
+    })
+      .then( r => r.json())
+      .then( r => console.log(r))
+    // fetch(`https://evening-temple-49691.herokuapp.com/toys/11`, {
+    //   method: "DELETE"
+    // })
+    //   .then( r => r.json())
+    //   .then( r => console.log(r))
     console.log('submitted')
   }
 
-  return results.type === 'card' ? cardResult: tableResults
+//   results.type === 'card' ? <ListGroupItem><OverlayTrigger trigger="click" placement="right" overlay={popover}>
+//   <Button variant="success">Add to database</Button>
+//   </OverlayTrigger></ListGroupItem>: results.items.map( (tableObj, index) => <tr key={index}><td>{index}</td><td>{tableObj.author}</td><td>{tableObj.title}</td><td>{tableObj.publisher}</td><td>{tableObj.description}</td><td><OverlayTrigger trigger="click" placement="right" overlay={popover}>
+//   <Button variant="success">Add to database</Button>
+// </OverlayTrigger></td></tr>)
+  return results.type === 'card' ? <ListGroupItem><OverlayTrigger trigger="click" placement="right" overlay={popover}>
+  <Button variant="success">Add to database</Button>
+  </OverlayTrigger></ListGroupItem>: results.items.map( (tableObj, index) => <tr key={index}><td>{index}</td><td>{tableObj.author}</td><td>{tableObj.title}</td><td>{tableObj.publisher}</td><td>{tableObj.description}</td><td><OverlayTrigger trigger="click" placement="right" overlay={popover}>
+  <Button variant="success">Add to database</Button>
+</OverlayTrigger></td></tr>)
 }
 
 export default PopOv
