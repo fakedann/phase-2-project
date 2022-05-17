@@ -13,6 +13,12 @@ function ReviewForm(){
   const [show, setShow] = useState(false);
   const [condModal, setModal] = useState(true)
 
+  const topFiveBooks = []
+
+  for(let i=11; i<16; i++){
+    topFiveBooks.push(dataBase.items[i])
+  }
+
   console.log(dataBase)
 
   useEffect(() => {
@@ -59,7 +65,7 @@ function ReviewForm(){
           </Modal.Footer>
         </Modal>
 
-        { dataBase.items.length > 3 ? <CardItem book={dataBase[15]} results={dataBase}/>: null}
+        { dataBase.items.length > 3 ? topFiveBooks.map( bookObj => <CardItem key={bookObj.info.title} book={bookObj} results={dataBase}/>): null}
       
         </div>
       </div>
