@@ -151,3 +151,8 @@ label, input{
   margin-bottom: 5px;
   margin-top: 10px;
 }
+
+#dynamicTitle{
+  margin-top: 35px;
+  margin-bottom: 35px;
+}

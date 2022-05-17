@@ -44,7 +44,7 @@ function ReviewForm(){
         <div className="search-item">
 
         <DiscoverSearch fetchInput={findItems}/>
-        <h3>{display.type === 'init' ? 'LATEST 5 ENTRIES': 'SEARCH RESULTS'}</h3>
+        <h2 id="dynamicTitle">{display.type === 'init' ? 'LATEST 5 ENTRIES': 'SEARCH RESULTS'}</h2>
 
             <Modal
           show={show}
