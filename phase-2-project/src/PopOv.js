@@ -9,6 +9,7 @@ function PopOv({results, callModal}){
   const [btnSrch, setBtn] = useState('')
   const [commentInput, setComment] = useState('')
   const [btnStates, setStates] = useState([])
+  const [bookInfo, setBookInfo] = useState({title: '', author: '', publisher: '', image: ''})
   // console.log(btnStates)
 
   const popover = (
@@ -39,7 +40,6 @@ function PopOv({results, callModal}){
       e.target.className = "myBtns"
       setStates( btnStates.filter( btnObj => btnObj !== e.target.innerText))
     }
-    console.log(e.target.innerText)
   }
   
   function handleBtnSubmit(e) {
@@ -47,7 +47,7 @@ function PopOv({results, callModal}){
     fetch('https://evening-temple-49691.herokuapp.com/toys', {
       method: "POST",
       headers: {"Content-Type": "application/json" },
-      body: JSON.stringify({user: btnSrch, interactions: btnStates, comments: commentInput})
+      body: JSON.stringify({user: btnSrch, info: bookInfo, interactions: btnStates, comments: commentInput})
     })
       .then( r => r.json())
       .then( r => callModal(true))
@@ -59,8 +59,13 @@ function PopOv({results, callModal}){
     console.log('submitted')
   }
 
+  function retrieveBookInfo(e){
+  
+    setBookInfo({['title']: e.target.parentNode.parentNode.parentNode.children[1].children[0].innerText, ['author']: e.target.parentNode.parentNode.children[0].innerText.split(": ")[1], ['publisher']: e.target.parentNode.parentNode.children[1].innerText.split(": ")[1], ['image']: e.target.parentNode.parentNode.parentNode.children[0].src})
+  }
+
   return results.type === 'card' ? <ListGroupItem><OverlayTrigger trigger="click" placement="right" overlay={popover}>
-  <Button variant="success">Thoughts?</Button>
+  <Button onClick={retrieveBookInfo} variant="success">Thoughts?</Button>
   </OverlayTrigger></ListGroupItem>: results.items.map( (tableObj, index) => <tr key={index}><td>{index}</td><td>{tableObj.author}</td><td>{tableObj.title}</td><td>{tableObj.publisher}</td><td>{tableObj.description}</td><td><OverlayTrigger trigger="click" placement="right" overlay={popover}>
   <Button variant="success">Thoughts?</Button>
 </OverlayTrigger></td></tr>)
