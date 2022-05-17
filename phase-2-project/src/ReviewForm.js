@@ -5,6 +5,7 @@ import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
 import ListGroupItem from 'react-bootstrap/ListGroupItem'
 import CardItem from './CardItem'
+import DiscoverSearch from './DiscoverSearch'
 
 function ReviewForm(){
 
@@ -13,19 +14,24 @@ function ReviewForm(){
   const [show, setShow] = useState(false);
   const [condModal, setModal] = useState(true)
 
-  const topFiveBooks = []
+  const [display, setDisplay] = useState([])
+  console.log(display.length)
 
-  for(let i=11; i<16; i++){
-    topFiveBooks.push(dataBase.items[i])
-  }
+  // const topFiveBooks = display.filter( bookObj => bookObj.id > dataBase.items.length-5)
 
-  console.log(dataBase)
+
+  // for(let i=11; i<18; i++){
+  //   topFiveBooks.push(dataBase.items[i])
+  // }
+
+  // console.log(topFiveBooks)
 
   useEffect(() => {
     fetch('https://evening-temple-49691.herokuapp.com/toys')
       .then( data => data.json() )
       .then( data => {
-        setDataBase({['type']: 'discover', ['items']: [...data]})
+        setDataBase({['type']: 'discover', ['items']: data.filter(book => book.info ? book:undefined)})
+        setDisplay(data.filter( bookObj => bookObj.id > data.length-5))
       })
   }, []);
 
@@ -37,6 +43,11 @@ function ReviewForm(){
     }, 500);
   }
 
+  function findItems(data, tipo){
+    setDisplay(dataBase.items.filter( bookObj => bookObj.info[tipo] === data))
+    
+  }
+
 
   return (
     <div id="books">
@@ -44,7 +55,8 @@ function ReviewForm(){
       <div id="search-list">
         <div className="search-item">
 
-        {/* <BookSearch fetchInput={fetchInput}/> */}
+        <DiscoverSearch fetchInput={findItems}/>
+        <h3>LATEST 5 ENTRIES</h3>
 
             <Modal
           show={show}
@@ -65,7 +77,9 @@ function ReviewForm(){
           </Modal.Footer>
         </Modal>
 
-        { dataBase.items.length > 3 ? topFiveBooks.map( bookObj => <CardItem key={bookObj.info.title} book={bookObj} results={dataBase}/>): null}
+        { display.map( bookObj => <CardItem key={bookObj.id} book={bookObj} results={dataBase}/>)}
+
+        {/* display.map( bookObj => <CardItem key={bookObj.id} book={bookObj} results={dataBase}/>): topFiveBooks.map( bookObj => <CardItem key={bookObj.id} book={bookObj} results={dataBase}/>) */}
       
         </div>
       </div>
