@@ -141,3 +141,13 @@ label, input{
   background-color: #DDD;
   color: #999;
 }
+
+.commentInput {
+  height: 60px;
+  margin-right: 15px;
+}
+
+.commentLabel {
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
