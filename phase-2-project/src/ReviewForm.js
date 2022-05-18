@@ -34,6 +34,7 @@ function ReviewForm(){
 
   function findItems(data, tipo){
     setDisplay({['type']: 'notinit', ['items']: dataBase.items.filter( bookObj => bookObj.info[tipo] === data)})
+    callModal(true)
     
   }
 
@@ -54,6 +55,7 @@ function ReviewForm(){
       // names must be equal
       return 0;
     });
+    callModal(true)
     setDisplay({...display, ['items']: [...sorted]})
   }
 

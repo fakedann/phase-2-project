@@ -177,6 +177,7 @@ label, input{
   border-color: black;
   margin-bottom: 40px;;
   margin-top: 30px;
+  margin-right: 20px;
 }
 #filter2{
   background-color: #81B29A;
@@ -184,6 +185,7 @@ label, input{
   border-color: black;
   margin-bottom: 40px;
   margin-top: 30px;
+  margin-right: 20px;
 }
 #filter3{
   background-color: #81B29A;
@@ -191,5 +193,6 @@ label, input{
   border-color: black;
   margin-bottom: 40px;;
   margin-top: 30px;
+  margin-right: 20px;
 }
 
