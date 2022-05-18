@@ -12,7 +12,7 @@ function ReviewForm(){
   const [condModal, setModal] = useState(true)
 
   const [display, setDisplay] = useState({type: '', items: []})
-  console.log(display.items.length)
+  console.log(display.items)
 
   useEffect(() => {
     fetch('https://evening-temple-49691.herokuapp.com/toys')
@@ -36,6 +36,26 @@ function ReviewForm(){
     
   }
 
+  function sortDisplay(e){
+    console.log(e.target)
+    let aux = e.target.innerText.toLowerCase()
+
+    // const sorted = display.items.sort(function(a, b) {
+    //   const nameA = a.info[aux].toUpperCase(); // ignore upper and lowercase
+    //   const nameB = b.info[aux].toUpperCase(); // ignore upper and lowercase
+    //   if (nameA < nameB) {
+    //     return -1;
+    //   }
+    //   if (nameA > nameB) {
+    //     return 1;
+    //   }
+    
+    //   // names must be equal
+    //   return 0;
+    // });
+    // setDisplay(sorted)
+  }
+
 
   return (
     <div id="books">
@@ -45,6 +65,10 @@ function ReviewForm(){
 
         <DiscoverSearch fetchInput={findItems}/>
         <h2 id="dynamicTitle">{display.type === 'init' ? 'LATEST 5 ENTRIES': 'SEARCH RESULTS'}</h2>
+        <h5>Organize alphabetically by:</h5>
+        <Button onClick={sortDisplay} variant="warning">Title</Button>{' '}
+        <Button onClick={sortDisplay} variant="warning">Author</Button>{' '}
+        <Button onClick={sortDisplay} variant="warning">Publisher</Button>{' '}
 
             <Modal
           show={show}
