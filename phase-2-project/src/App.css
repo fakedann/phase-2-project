@@ -156,3 +156,40 @@ label, input{
   margin-top: 35px;
   margin-bottom: 35px;
 }
+
+#initialBtn{
+  height: 80px;
+  width: 150px;
+  background-color: #F2CC8F;
+  color: black;
+  border-color: black;
+}
+
+.filterBtn{
+  background-color: #81B29A;
+  color: black;
+  border-color: black;
+}
+
+#filter1{
+  background-color: #81B29A;
+  color: black;
+  border-color: black;
+  margin-bottom: 40px;;
+  margin-top: 30px;
+}
+#filter2{
+  background-color: #81B29A;
+  color: black;
+  border-color: black;
+  margin-bottom: 40px;
+  margin-top: 30px;
+}
+#filter3{
+  background-color: #81B29A;
+  color: black;
+  border-color: black;
+  margin-bottom: 40px;;
+  margin-top: 30px;
+}
+
