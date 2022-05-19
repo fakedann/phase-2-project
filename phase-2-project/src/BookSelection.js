@@ -14,10 +14,12 @@ function BookSelection(){
 
   const [show, setShow] = useState(false);
   const [condModal, setModal] = useState(true)
+  const [resultTitle, setTitle] = useState('')
   console.log(results)
 
   function fetchInput(searchData, checkedStatus){
-    
+
+    setTitle(searchData)
     if(checkedStatus === 'date'){
       try{
         fetch(`https://api.nytimes.com/svc/books/v3/lists/${searchData}/hardcover-fiction.json?api-key=VCLxI1f0Mv8l1IhdYJsSjWdpKAmryPV7`)
@@ -85,6 +87,7 @@ function BookSelection(){
           <div className="search-item">
 
           <BookSearch fetchInput={fetchInput}/>
+          {resultTitle !== '' ? <h5 id="srchBook" >SEARCH RESULTS FOR: {resultTitle}</h5>: null}
 
               <Modal
             show={show}
