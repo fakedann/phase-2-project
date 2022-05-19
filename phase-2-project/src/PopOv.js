@@ -70,9 +70,6 @@ function PopOv({results, callModal}){
 
   return results.type === 'card' ? <ListGroupItem><OverlayTrigger trigger="click" placement="right" overlay={popover}>
   <Button onClick={retrieveBookInfo} variant="success">Thoughts?</Button>
-  </OverlayTrigger></ListGroupItem>: results.items.map( (tableObj, index) => <tr key={index}><td>{index}</td><td>{tableObj.author}</td><td>{tableObj.title}</td><td>{tableObj.publisher}</td><td>{tableObj.description}</td><td><OverlayTrigger trigger="click" placement="right" overlay={popover}>
-  <Button variant="success">Thoughts?</Button>
-</OverlayTrigger></td></tr>)
-}
+  </OverlayTrigger></ListGroupItem>: null}
 
 export default PopOv

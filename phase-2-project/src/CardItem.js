@@ -37,6 +37,14 @@ function CardItem({book, results, callModal}){
       <ListGroupItem>User: {book.user}</ListGroupItem>
       <ListGroupItem>Author: {book.info.author}</ListGroupItem>
       <ListGroupItem >Publisher: {book.info.publisher}</ListGroupItem>
+      <ListGroupItem >Interactions: {book.interactions.map( (bookObj, index) => {
+        if(index < book.interactions.length-1 ){
+          return `${bookObj}, `
+        }else{
+          return bookObj
+        }
+        
+      })}</ListGroupItem>
     </ListGroup>
   </Card>
   }

@@ -57,7 +57,7 @@ function BookSelection(){
           } 
         } )
         .then( data => {
-          setResults({['type']: 'table', ['items']: [...data.results]})
+          setResults({['type']: 'card', ['items']: [...data.results]})
           callModal(true)
         } )
         .catch( (err) => {
