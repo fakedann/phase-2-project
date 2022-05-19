@@ -13,6 +13,7 @@ function ReviewForm(){
 
   const [display, setDisplay] = useState({type: '', items: []})
   const [hideComponent, setHide] = useState(false)
+  const [resultTitle, setTitle] = useState('')
   console.log(display.items)
 
   useEffect(() => {
@@ -44,6 +45,7 @@ function ReviewForm(){
   }
 
   function findItems(data, tipo){
+    setTitle(data)
     setDisplay({['type']: 'notinit', ['items']: dataBase.items.filter( bookObj => bookObj.info[tipo].toLowerCase().includes(data.trim().toLowerCase()))})
     
   }
@@ -82,7 +84,7 @@ function ReviewForm(){
 
         <Button onClick={showComponent} id="initialBtn" >Advanced Search</Button>{' '}
         {hideComponent ? <DiscoverSearch fetchInput={findItems}/>: null}
-        <h2 id="dynamicTitle">{display.type === 'init' ? 'LATEST 5 ENTRIES': 'SEARCH RESULTS'}</h2>
+        <h2 id="dynamicTitle">{display.type === 'init' ? 'LATEST 5 ENTRIES': `SEARCH RESULTS FOR: ${resultTitle}`}</h2>
         <h5 id="little">Organize alphabetically by:</h5>
         <Button id="filter1" onClick={sortDisplay} >Title</Button>{' '}
         <Button id="filter2" onClick={sortDisplay} >Author</Button>{' '}
@@ -98,7 +100,7 @@ function ReviewForm(){
             <Modal.Title>Notification!</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {condModal ? 'Success!' :'Invalid input. Please, try again.'}
+            {condModal ? 'Success!' :'Your search did not return any results. Please, try something else.'}
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={() => setShow(false)}>
