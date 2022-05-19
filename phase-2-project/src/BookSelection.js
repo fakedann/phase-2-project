@@ -30,20 +30,13 @@ function BookSelection(){
           } 
         } )
         .then( data => {
-          console.log(data)
-          setShow(true)
-          setModal(true)
           setResults({['type']: 'card', ['items']: [...data.results.books]})
-          setTimeout(() => {
-            setShow(false)
-          }, 500);
-          
+          callModal(true)
           
         } )
         .catch( (err) => {
           console.log(err)
-          setShow(true)
-          setModal(false)
+          callModal(false)
           
         })
       } catch(e){
@@ -62,19 +55,12 @@ function BookSelection(){
           } 
         } )
         .then( data => {
-          console.log(data)
-          setShow(true)
-          setModal(true)
           setResults({['type']: 'table', ['items']: [...data.results]})
-          setTimeout(() => {
-            setShow(false)
-          }, 500);
-          
+          callModal(true)
         } )
         .catch( (err) => {
           console.log(err)
-          setModal(false)
-          setShow(true)
+          callModal(false)
         })
       } catch(e){
         console.error(e)
@@ -83,13 +69,14 @@ function BookSelection(){
   }
 
   function callModal(resp){
-    setShow(resp)
+    setShow(true)
     setModal(resp)
-    setTimeout(() => {
-      setShow(false)
-    }, 500);
+    if(resp === true){
+      setTimeout(() => {
+        setShow(false)
+      }, 500);
+    }
   }
-
   return (
 
     <div id="books">

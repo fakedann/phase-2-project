@@ -51,6 +51,10 @@ function PopOv({results, callModal}){
     })
       .then( r => r.json())
       .then( r => callModal(true))
+      .catch( err => {
+        console.log(err)
+        callModal(false)
+      })
     // fetch(`https://evening-temple-49691.herokuapp.com/toys/11`, {
     //   method: "DELETE"
     // })
