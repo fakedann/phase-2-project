@@ -24,17 +24,27 @@ function ReviewForm(){
       })
   }, []);
 
+  useEffect( () => {
+    if(display.type === 'notinit' && display.items.length > 0){
+      callModal(true)
+    }else if(display.type === 'notinit'){
+      callModal(false)
+    }
+
+  }, [display])
+
   function callModal(resp){
-    setShow(resp)
+    setShow(true)
     setModal(resp)
-    setTimeout(() => {
-      setShow(false)
-    }, 500);
+    if(resp === true){
+      setTimeout(() => {
+        setShow(false)
+      }, 500);
+    }
   }
 
   function findItems(data, tipo){
-    setDisplay({['type']: 'notinit', ['items']: dataBase.items.filter( bookObj => bookObj.info[tipo] === data)})
-    callModal(true)
+    setDisplay({['type']: 'notinit', ['items']: dataBase.items.filter( bookObj => bookObj.info[tipo].toLowerCase().includes(data.trim().toLowerCase()))})
     
   }
 

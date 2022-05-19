@@ -3,7 +3,7 @@ import React, { useState } from "react";
 function DiscoverSearch({fetchInput}){
 
   const [searchData, setSearch] = useState('')
-  const [checkedStatus, setChecked] = useState('date')
+  const [checkedStatus, setChecked] = useState('title')
 
 
   function handleChange(e){
