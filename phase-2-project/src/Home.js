@@ -71,16 +71,11 @@ function Home({books, loading}){
             keyboard={false}
           >
             <Modal.Header closeButton>
-              <Modal.Title>Notification!</Modal.Title>
+              <Modal.Title>Notification</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               {condModal ? 'Success!' :'Invalid input. Please, try again.'}
             </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={() => setShow(false)}>
-                Close
-              </Button>
-            </Modal.Footer>
           </Modal>}
           </div>
         </div>

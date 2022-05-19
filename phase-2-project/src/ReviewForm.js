@@ -97,16 +97,11 @@ function ReviewForm(){
           keyboard={false}
         >
           <Modal.Header closeButton>
-            <Modal.Title>Notification!</Modal.Title>
+            <Modal.Title>Notification</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             {condModal ? 'Success!' :'Your search did not return any results. Please, try something else.'}
           </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={() => setShow(false)}>
-              Close
-            </Button>
-          </Modal.Footer>
         </Modal>
 
         { display.items.map( bookObj => <CardItem key={bookObj.id} book={bookObj} results={dataBase}/>)}
