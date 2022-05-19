@@ -40,7 +40,7 @@ function ReviewForm(){
     if(resp === true){
       setTimeout(() => {
         setShow(false)
-      }, 500);
+      }, 2000);
     }
   }
 

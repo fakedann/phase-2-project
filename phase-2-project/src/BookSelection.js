@@ -3,7 +3,6 @@ import CardItem from "./CardItem";
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import BookSearch from "./BookSearch";
-import TableItem from "./TableItem";
 
 function BookSelection(){
 
@@ -76,7 +75,7 @@ function BookSelection(){
     if(resp === true){
       setTimeout(() => {
         setShow(false)
-      }, 500);
+      }, 2000);
     }
   }
   return (
@@ -109,7 +108,7 @@ function BookSelection(){
           </Modal>
 
 
-          {results.type === '' ? null: (results.type === 'card' ? results.items.map( bookObj => <CardItem key={bookObj.title} book={bookObj} results={results} callModal={callModal}/>): <TableItem results={results} callModal={callModal}/>)}
+          {results.type === '' ? null: results.items.map( bookObj => <CardItem key={bookObj.title} book={bookObj} results={results} callModal={callModal}/>)}
           </div>
         </div>
       </div>

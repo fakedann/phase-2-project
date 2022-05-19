@@ -30,7 +30,7 @@ function Home({books, loading}){
     setModal(resp)
     setTimeout(() => {
       setShow(false)
-    }, 500);
+    }, 2000);
   }
  
 
