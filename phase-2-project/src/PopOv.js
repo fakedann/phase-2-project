@@ -6,7 +6,7 @@ import ListGroupItem from 'react-bootstrap/ListGroupItem'
 
 function PopOv({results, callModal}){
 
-  const [btnSrch, setBtn] = useState('')
+  const [user, setUser] = useState('')
   const [commentInput, setComment] = useState('')
   const [btnStates, setStates] = useState([])
   const [bookInfo, setBookInfo] = useState({title: '', author: '', publisher: '', image: ''})
@@ -22,7 +22,7 @@ function PopOv({results, callModal}){
         <button className="myBtns" onClick={handleBtnClick} >Disliked</button>
         <form onSubmit={handleBtnSubmit}>
             <label htmlFor="search">Enter Your Name:</label>
-            <input type="text" value={btnSrch} placeholder="Daniel Escalona" onChange={e => setBtn(e.target.value)}/>
+            <input type="text" value={user} placeholder="Daniel Escalona" onChange={e => setUser(e.target.value)}/>
             <label className="commentLabel" htmlFor="search">Share your Comments:</label>
             <input className="commentInput" type="text" value={commentInput} placeholder="Wonderful book!" onChange={e => setComment(e.target.value)}/>
             <button type="submit">Submit</button>
@@ -44,10 +44,14 @@ function PopOv({results, callModal}){
   
   function handleBtnSubmit(e) {
     e.preventDefault()
-    fetch('https://evening-temple-49691.herokuapp.com/toys', {
+    console.log(user)
+    if(user.trim() === ''){
+      callModal(false)
+    }else{
+      fetch('https://evening-temple-49691.herokuapp.com/toys', {
       method: "POST",
       headers: {"Content-Type": "application/json" },
-      body: JSON.stringify({user: btnSrch, info: bookInfo, interactions: btnStates, comments: commentInput})
+      body: JSON.stringify({user: user, info: bookInfo, interactions: btnStates, comments: commentInput})
     })
       .then( r => r.json())
       .then( r => callModal(true))
@@ -55,6 +59,8 @@ function PopOv({results, callModal}){
         console.log(err)
         callModal(false)
       })
+    }
+    
     // fetch(`https://evening-temple-49691.herokuapp.com/toys/11`, {
     //   method: "DELETE"
     // })

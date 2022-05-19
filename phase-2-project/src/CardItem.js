@@ -34,7 +34,7 @@ function CardItem({book, results, callModal}){
       </Card.Text>
     </Card.Body>
     <ListGroup className="list-group-flush">
-      <ListGroupItem>User: {book.user}</ListGroupItem>
+      <ListGroupItem>User name: {book.user}</ListGroupItem>
       <ListGroupItem>Author: {book.info.author}</ListGroupItem>
       <ListGroupItem >Publisher: {book.info.publisher}</ListGroupItem>
       <ListGroupItem >Interactions: {book.interactions.map( (bookObj, index) => {
