@@ -17,7 +17,7 @@ function NavBar(){
           <Nav.Link>NYT's Search</Nav.Link>
         </LinkContainer>
         <LinkContainer to="/review-book">
-          <Nav.Link>DISCOVER/ACTIVITY</Nav.Link>
+          <Nav.Link>DISCOVER</Nav.Link>
         </LinkContainer>
       </Nav>
       </Container>

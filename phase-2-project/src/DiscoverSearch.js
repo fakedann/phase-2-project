@@ -20,7 +20,7 @@ function DiscoverSearch({fetchInput}){
   return(
     <form onSubmit={handleSubmit}>
       <label htmlFor="search">Search:</label>
-      <input id="srchBar" type="text" value={searchData} placeholder="dadada " onChange={e => setSearch(e.target.value)}/>
+      <input id="srchBar" type="text" value={searchData} placeholder="A specific book/author/publisher of your interest" onChange={e => setSearch(e.target.value)}/>
       <button type="submit">Submit</button>
       <div className="radio">
         <label>Title</label>

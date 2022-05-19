@@ -110,8 +110,6 @@ function ReviewForm(){
         </Modal>
 
         { display.items.map( bookObj => <CardItem key={bookObj.id} book={bookObj} results={dataBase}/>)}
-
-        {/* display.map( bookObj => <CardItem key={bookObj.id} book={bookObj} results={dataBase}/>): topFiveBooks.map( bookObj => <CardItem key={bookObj.id} book={bookObj} results={dataBase}/>) */}
       
         </div>
       </div>
