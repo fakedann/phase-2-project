@@ -16,10 +16,10 @@ function PopOv({results, callModal}){
     <Popover id="popover-basic">
       <Popover.Header as="h3">Tell us about your experience:</Popover.Header>
       <Popover.Body>
-        <button className="myBtns" onClick={handleBtnClick} variant="warning">Have Read</button>
-        <button className="myBtns" onClick={handleBtnClick}  variant="warning">Will Read</button>
-        <button className="myBtns" onClick={handleBtnClick} >Liked</button>
-        <button className="myBtns" onClick={handleBtnClick} >Disliked</button>
+        <button className="btnClicked" onClick={handleBtnClick} variant="warning">Have Read</button>
+        <button className="btnClicked" onClick={handleBtnClick}  variant="warning">Will Read</button>
+        <button className="btnClicked" id="like" onClick={handleBtnClick} >Liked</button>
+        <button className="btnClicked" id="dislike" onClick={handleBtnClick} >Disliked</button>
         <form onSubmit={handleBtnSubmit}>
             <label className="nameLabel" htmlFor="search">Enter Your Name:</label>
             <input type="text" value={user} maxLength="20" placeholder="Daniel Escalona" onChange={e => setUser(e.target.value)}/>
@@ -33,11 +33,24 @@ function PopOv({results, callModal}){
 
   function handleBtnClick(e) {
   
-    if(e.target.className === "myBtns"){
-      e.target.className = "btnClicked"
-      setStates([...btnStates, e.target.innerText])
-    }else{
+    if(e.target.className === "btnClicked"){
       e.target.className = "myBtns"
+      if(e.target.innerText === "Liked"){
+        const srch = btnStates.filter( obj => obj !== 'Disliked')
+        setStates([...srch, e.target.innerText])
+        let btn = document.querySelector('#dislike')
+        btn.className = "btnClicked"
+        
+      }else if (e.target.innerText === "Disliked"){
+        const srch = btnStates.filter( obj => obj !== 'Liked')
+        setStates([...srch, e.target.innerText])
+        let btn = document.querySelector('#like')
+        btn.className = "btnClicked"
+      }else{
+        setStates([...btnStates, e.target.innerText])
+      }
+    }else{
+      e.target.className = "btnClicked"
       setStates( btnStates.filter( btnObj => btnObj !== e.target.innerText))
     }
   }
