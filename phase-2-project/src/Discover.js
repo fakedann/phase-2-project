@@ -14,7 +14,6 @@ function ReviewForm(){
   const [display, setDisplay] = useState({type: '', items: []})
   const [hideComponent, setHide] = useState(false)
   const [resultTitle, setTitle] = useState('')
-  console.log(display.items)
 
   useEffect(() => {
     fetch('https://evening-temple-49691.herokuapp.com/toys')

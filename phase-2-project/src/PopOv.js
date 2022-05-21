@@ -21,7 +21,7 @@ function PopOv({results, callModal}){
         <button className="myBtns" onClick={handleBtnClick} >Liked</button>
         <button className="myBtns" onClick={handleBtnClick} >Disliked</button>
         <form onSubmit={handleBtnSubmit}>
-            <label htmlFor="search">Enter Your Name:</label>
+            <label className="nameLabel" htmlFor="search">Enter Your Name:</label>
             <input type="text" value={user} placeholder="Daniel Escalona" onChange={e => setUser(e.target.value)}/>
             <label className="commentLabel" htmlFor="search">Share your Comments:</label>
             <input className="commentInput" type="text" value={commentInput} placeholder="Wonderful book!" onChange={e => setComment(e.target.value)}/>

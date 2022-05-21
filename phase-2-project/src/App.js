@@ -1,11 +1,10 @@
-import logo from './logo.svg';
 import React, { useState, useEffect } from 'react'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css'
 import { Route, Switch } from "react-router-dom";
 import Home from './Home';
 import BookSelection from './BookSelection';
-import ReviewForm from './ReviewForm';
+import Discover from './Discover';
 
 function App() {
 
@@ -27,7 +26,6 @@ function App() {
         setLoading(false);
       });
   }, []);
-  console.log(books)
 
   return (
     <div className="App">
@@ -35,11 +33,11 @@ function App() {
         <Route exact path="/">
           <Home books={books} loading={loading}/> 
         </Route>
-        <Route exact path="/book-selection">
+        <Route exact path="/nyt-search">
           <BookSelection />
         </Route>
-        <Route exact path="/review-book">
-          <ReviewForm />
+        <Route exact path="/discover">
+          <Discover />
         </Route>
       </Switch>
     </div>

@@ -143,7 +143,7 @@ label, input{
 }
 
 .commentInput {
-  height: 60px;
+  height: 45px;
   margin-right: 15px;
 }
 
@@ -200,3 +200,7 @@ label, input{
   margin-top: 20px;
 }
 
+.nameLabel{
+  display: block;
+  float: left;
+}

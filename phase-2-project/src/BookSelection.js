@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import CardItem from "./CardItem";
 import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
 import BookSearch from "./BookSearch";
 
 function BookSelection(){
@@ -81,7 +80,7 @@ function BookSelection(){
   return (
 
     <div id="books">
-      <h1 className="title">Search for our weekly rankings, authors, or publishing companies</h1>
+      <h1 className="title">Search for past weekly rankings, authors, or publishing companies</h1>
         <div id="search-list">
           <div className="search-item">
 

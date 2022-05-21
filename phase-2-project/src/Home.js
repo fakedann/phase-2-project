@@ -34,22 +34,6 @@ function Home({books, loading}){
       }, 2000);
     }
   }
- 
-
-  // const start = new Date("04/05/2020");
-  // const end = new Date("02/10/2020");
-  // console.log(text)
-  // let loop = new Date(start);
-  // while (loop >= end) {
-  //   console.log(loop);
-  //   let newDate = loop.setDate(loop.getDate() - 7);
-  //   const text = loop.toISOString().split('T')[0]
-  //   fetch(`https://api.nytimes.com/svc/books/v3/lists/${text}/hardcover-fiction.json?api-key=VCLxI1f0Mv8l1IhdYJsSjWdpKAmryPV7`)
-  //   .then( data => data.json())
-  //   .then( d => console.log(d) )
-  //   loop = new Date(newDate);
-  // }
-
   
   if (loading) {
     return <h1>Data is loading...</h1>;
@@ -57,8 +41,8 @@ function Home({books, loading}){
 
   return (
     <div className="home">
-      <h1 className="title">Welcome to Daniel's Website!</h1>
-      <h3>Here's this week's best-seller list..</h3>
+      <h1 className="title">Welcome to the New York Time's Best Seller Website!</h1>
+      <h3>Dive into this week's best-seller list..</h3>
       <div id="books">
         <div id="book-list">
           <div className="book-item">
