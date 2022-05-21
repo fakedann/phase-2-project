@@ -3,6 +3,7 @@ import CardItem from "./CardItem";
 import Modal from 'react-bootstrap/Modal'
 import BookSearch from "./BookSearch";
 import { v4 as uuidv4 } from 'uuid';
+import * as moment from 'moment';
 
 function BookSelection(){
 
@@ -14,35 +15,39 @@ function BookSelection(){
   const [show, setShow] = useState(false);
   const [condModal, setModal] = useState(true)
   const [resultTitle, setTitle] = useState('')
-  console.log(results)
+  
 
   function fetchInput(searchData, checkedStatus){
   
     setTitle(searchData)
     if(checkedStatus === 'date'){
-      try{
-        fetch(`https://api.nytimes.com/svc/books/v3/lists/${searchData}/hardcover-fiction.json?api-key=VCLxI1f0Mv8l1IhdYJsSjWdpKAmryPV7`)
-        .then( data => {
-          if(data.ok){
-            return data.json();
-          }  
-          else{
-            throw new Error("Status code error :" + data.status)
-          } 
-        } )
-        .then( data => {
-          console.log(data)
-          setResults({['type']: 'card', ['items']: [...data.results.books]})
-          callModal(true)
-          
-        } )
-        .catch( (err) => {
-          console.log(err)
-          callModal(false)
-          
-        })
-      } catch(e){
-        console.error(e)
+      let validDate = moment(searchData, 'YYYY-MM-DD',true).isValid();
+      if(validDate){
+        try{
+          fetch(`https://api.nytimes.com/svc/books/v3/lists/${searchData}/hardcover-fiction.json?api-key=VCLxI1f0Mv8l1IhdYJsSjWdpKAmryPV7`)
+          .then( data => {
+            if(data.ok){
+              return data.json();
+            }  
+            else{
+              throw new Error("Status code error :" + data.status)
+            } 
+          } )
+          .then( data => {
+            setResults({['type']: 'card', ['items']: [...data.results.books]})
+            callModal(true)
+            
+          } )
+          .catch( (err) => {
+            console.log(err)
+            callModal(false)
+            
+          })
+        } catch(e){
+          console.error(e)
+        }
+      }else{
+        callModal(false)
       }
       
     } else{
