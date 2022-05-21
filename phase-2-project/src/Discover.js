@@ -75,6 +75,10 @@ function ReviewForm(){
     e.target.remove()
   }
 
+  function goBacktoFive(){
+    setDisplay({['type']: 'init', ['items']: dataBase.items.filter( bookObj => bookObj.id > dataBase.items.length-5)})
+  }
+
   return (
     <div id="books">
     <h1 className="title">See what people are talking about in the book community</h1>
@@ -84,6 +88,7 @@ function ReviewForm(){
         <Button onClick={showComponent} id="initialBtn" >Advanced Search</Button>{' '}
         {hideComponent ? <DiscoverSearch fetchInput={findItems}/>: null}
         <h2 id="dynamicTitle">{display.type === 'init' ? 'LATEST 5 ENTRIES': `SEARCH RESULTS FOR: ${resultTitle}`}</h2>
+        {display.type === 'notinit' ? <Button onClick={goBacktoFive} id="backtofive" >BACK TO LATEST 5</Button>: null}
         <h5 id="little">Organize alphabetically by:</h5>
         <Button id="filter1" onClick={sortDisplay} >Title</Button>{' '}
         <Button id="filter2" onClick={sortDisplay} >Author</Button>{' '}
