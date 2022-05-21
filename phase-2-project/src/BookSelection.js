@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import CardItem from "./CardItem";
 import Modal from 'react-bootstrap/Modal'
 import BookSearch from "./BookSearch";
+import { v4 as uuidv4 } from 'uuid';
 
 function BookSelection(){
 
@@ -16,7 +17,7 @@ function BookSelection(){
   console.log(results)
 
   function fetchInput(searchData, checkedStatus){
-
+  
     setTitle(searchData)
     if(checkedStatus === 'date'){
       try{
@@ -30,6 +31,7 @@ function BookSelection(){
           } 
         } )
         .then( data => {
+          console.log(data)
           setResults({['type']: 'card', ['items']: [...data.results.books]})
           callModal(true)
           
@@ -103,7 +105,7 @@ function BookSelection(){
           </Modal>
 
 
-          {results.type === '' ? null: results.items.map( bookObj => <CardItem key={bookObj.title} book={bookObj} results={results} callModal={callModal}/>)}
+          {results.type === '' ? null: results.items.map( bookObj => <CardItem key={uuidv4()} book={bookObj} results={results} callModal={callModal}/>)}
           </div>
         </div>
       </div>

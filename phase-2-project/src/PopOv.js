@@ -49,7 +49,7 @@ function PopOv({results, callModal}){
     if(user.trim() === '' || /[^a-zA-Z]/.test(user)){
       callModal(false)
     }else{
-      fetch('https://evening-temple-49691.herokuapp.com/toys', {
+      fetch('https://evening-temple-49691.herokuapp.com/books', {
       method: "POST",
       headers: {"Content-Type": "application/json" },
       body: JSON.stringify({user: user, info: bookInfo, interactions: btnStates, comments: commentInput})

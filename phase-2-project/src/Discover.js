@@ -16,7 +16,7 @@ function ReviewForm(){
   const [resultTitle, setTitle] = useState('')
 
   useEffect(() => {
-    fetch('https://evening-temple-49691.herokuapp.com/toys')
+    fetch('https://evening-temple-49691.herokuapp.com/books')
       .then( data => data.json() )
       .then( data => {
         setDataBase({['type']: 'discover', ['items']: data.filter(book => book.info ? book:undefined)})
