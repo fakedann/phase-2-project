@@ -22,9 +22,9 @@ function PopOv({results, callModal}){
         <button className="myBtns" onClick={handleBtnClick} >Disliked</button>
         <form onSubmit={handleBtnSubmit}>
             <label className="nameLabel" htmlFor="search">Enter Your Name:</label>
-            <input type="text" value={user} placeholder="Daniel Escalona" onChange={e => setUser(e.target.value)}/>
+            <input type="text" value={user} maxLength="20" placeholder="Daniel Escalona" onChange={e => setUser(e.target.value)}/>
             <label className="commentLabel" htmlFor="search">Share your Comments:</label>
-            <input className="commentInput" type="text" value={commentInput} placeholder="Wonderful book!" onChange={e => setComment(e.target.value)}/>
+            <input className="commentInput" type="text" maxLength="150" value={commentInput} placeholder="Wonderful book!" onChange={e => setComment(e.target.value)}/>
             <button type="submit">Submit</button>
         </form>
       </Popover.Body>
@@ -46,7 +46,7 @@ function PopOv({results, callModal}){
     e.preventDefault()
 
     console.log(user)
-    if(user.trim() === '' || /[^a-zA-Z]/.test(user)){
+    if(user.trim() === '' || /[^a-zA-Z ]/.test(user)){
       callModal(false)
     }else{
       fetch('https://evening-temple-49691.herokuapp.com/books', {
