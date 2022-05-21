@@ -18,8 +18,11 @@ function BookSelection(){
   
 
   function fetchInput(searchData, checkedStatus){
-  
-    setTitle(searchData)
+
+    if(searchData === ''){
+      callModal(false)
+    }else{
+      setTitle(searchData)
     if(checkedStatus === 'date'){
       let validDate = moment(searchData, 'YYYY-MM-DD',true).isValid();
       if(validDate){
@@ -73,6 +76,8 @@ function BookSelection(){
         console.error(e)
       }
     }
+    }
+
   }
 
   function callModal(resp){
@@ -93,6 +98,7 @@ function BookSelection(){
 
           <BookSearch fetchInput={fetchInput}/>
           {resultTitle !== '' ? <h5 id="srchBook" >SEARCH RESULTS FOR: {resultTitle}</h5>: null}
+          {results.items.length === 0 ? <h6>NO RESULTS</h6>: null}
 
               <Modal
             show={show}
