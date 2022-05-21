@@ -44,8 +44,9 @@ function PopOv({results, callModal}){
   
   function handleBtnSubmit(e) {
     e.preventDefault()
+
     console.log(user)
-    if(user.trim() === ''){
+    if(user.trim() === '' || /[^a-zA-Z]/.test(user)){
       callModal(false)
     }else{
       fetch('https://evening-temple-49691.herokuapp.com/toys', {
