@@ -69,19 +69,13 @@ function PopOv({results, callModal}){
       headers: {"Content-Type": "application/json" },
       body: JSON.stringify({user: user, info: bookInfo, interactions: btnStates, comments: commentInput})
     })
-      .then( r => r.json())
-      .then( r => callModal(true))
+      .then( () => callModal(true))
       .catch( err => {
         console.log(err)
         callModal(false)
       })
     }
     
-    // fetch(`https://evening-temple-49691.herokuapp.com/toys/11`, {
-    //   method: "DELETE"
-    // })
-    //   .then( r => r.json())
-    //   .then( r => console.log(r))
     console.log('submitted')
   }
 

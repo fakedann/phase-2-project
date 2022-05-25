@@ -16,10 +16,6 @@ function BookSelection(){
   const [condModal, setModal] = useState(true)
   const [resultTitle, setTitle] = useState('')
 
-  if(results.items.length > 2){
-    console.log(results.items[0].isbns[0].isbn10)
-  }
-  
 
   function fetchInput(searchData, checkedStatus){
 
@@ -42,18 +38,18 @@ function BookSelection(){
           } )
           .then( data => {
             setResults({['type']: 'card', ['items']: [...data.results.books]})
-            callModal(true)
             
           } )
           .catch( (err) => {
-            console.log(err)
-            callModal(false)
+            console.log('daddad')
+            setResults({['type']: 'card', ['items']: []})
             
           })
         } catch(e){
           console.error(e)
         }
       }else{
+        setResults({['type']: 'card', ['items']: []})
         callModal(false)
       }
       
@@ -70,11 +66,9 @@ function BookSelection(){
         } )
         .then( data => {
           setResults({['type']: 'card', ['items']: [...data.results]})
-          callModal(true)
         } )
         .catch( (err) => {
-          console.log(err)
-          callModal(false)
+          setResults({['type']: 'card', ['items']: []})
         })
       } catch(e){
         console.error(e)

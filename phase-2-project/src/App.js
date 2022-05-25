@@ -8,30 +8,11 @@ import Discover from './Discover';
 
 function App() {
 
-  const [books, setBooks] = useState({
-    type: '',
-    items: []
-  })
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    fetch(`https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=VCLxI1f0Mv8l1IhdYJsSjWdpKAmryPV7`)
-      .then( data => data.json())
-      .then( d => setBooks({['type']: 'card', ['items']: [...d.results.books]}) )
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
-
   return (
     <div className="App">
       <Switch>
         <Route exact path="/">
-          <Home books={books} loading={loading}/> 
+          <Home /> 
         </Route>
         <Route exact path="/nyt-search">
           <BookSelection />

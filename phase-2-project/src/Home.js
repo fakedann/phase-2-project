@@ -3,14 +3,34 @@ import Button from 'react-bootstrap/Button'
 import CardItem from "./CardItem";
 import Modal from 'react-bootstrap/Modal'
 
-function Home({books, loading}){
+function Home(){
 
   const [expand, setExpand] = useState(false)
+  const [books, setBooks] = useState({
+    type: '',
+    items: []
+  })
+  const [loading, setLoading] = useState(false);
+
   const displayedCards = books.items.map( bookObj => <CardItem key={bookObj.title} book={bookObj} results={books} callModal={callModal}/>)
   const topFiveBooks = []
 
   const [show, setShow] = useState(false);
   const [condModal, setModal] = useState(true)
+
+
+  useEffect(() => {
+    setLoading(true);
+    fetch(`https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=VCLxI1f0Mv8l1IhdYJsSjWdpKAmryPV7`)
+      .then( data => data.json())
+      .then( d => setBooks({['type']: 'card', ['items']: [...d.results.books]}) )
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
   for(let i=0; i<5; i++){
     topFiveBooks.push(displayedCards[i])

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import CardItem from './CardItem'
 import DiscoverSearch from './DiscoverSearch'
@@ -7,9 +6,6 @@ import DiscoverSearch from './DiscoverSearch'
 function ReviewForm(){
 
   const [dataBase, setDataBase] = useState({type: '', items: []})
-
-  const [show, setShow] = useState(false);
-  const [condModal, setModal] = useState(true)
 
   const [display, setDisplay] = useState({type: '', items: []})
   const [hideComponent, setHide] = useState(false)
@@ -23,25 +19,6 @@ function ReviewForm(){
         setDisplay({['type']: 'init', ['items']: data.filter( bookObj => bookObj.id > data.length-5)})
       })
   }, []);
-
-  useEffect( () => {
-    if(display.type === 'notinit' && display.items.length > 0){
-      callModal(true)
-    }else if(display.type === 'notinit'){
-      callModal(false)
-    }
-
-  }, [display])
-
-  function callModal(resp){
-    setShow(true)
-    setModal(resp)
-    if(resp === true){
-      setTimeout(() => {
-        setShow(false)
-      }, 2000);
-    }
-  }
 
   function findItems(data, tipo){
     setTitle(data)
@@ -66,7 +43,6 @@ function ReviewForm(){
       // names must be equal
       return 0;
     });
-    callModal(true)
     setDisplay({...display, ['items']: [...sorted]})
   }
 
@@ -93,20 +69,6 @@ function ReviewForm(){
         <Button id="filter1" onClick={sortDisplay} >Title</Button>{' '}
         <Button id="filter2" onClick={sortDisplay} >Author</Button>{' '}
         <Button id="filter3" onClick={sortDisplay} >Publisher</Button>{' '}
-
-            <Modal
-          show={show}
-          onHide={() => setShow(false)}
-          backdrop="static"
-          keyboard={false}
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Notification</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            {condModal ? 'Success!' :'Your search did not return any results. Please, try something else.'}
-          </Modal.Body>
-        </Modal>
 
         { display.items.map( bookObj => <CardItem key={bookObj.id} book={bookObj} results={dataBase}/>)}
       
