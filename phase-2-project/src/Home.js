@@ -18,10 +18,12 @@ function Home(){
   const [show, setShow] = useState(false);
   const [condModal, setModal] = useState(true)
 
+  console.log(process.env.REACT_APP_KEY);
+
 
   useEffect(() => {
     setLoading(true);
-    fetch(`https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=VCLxI1f0Mv8l1IhdYJsSjWdpKAmryPV7`)
+    fetch(`https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=${process.env.REACT_APP_KEY}`)
       .then( data => data.json())
       .then( d => setBooks({['type']: 'card', ['items']: [...d.results.books]}) )
       .catch((err) => {

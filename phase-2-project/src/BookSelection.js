@@ -27,7 +27,7 @@ function BookSelection(){
       let validDate = moment(searchData, 'YYYY-MM-DD',true).isValid();
       if(validDate){
         try{
-          fetch(`https://api.nytimes.com/svc/books/v3/lists/${searchData}/hardcover-fiction.json?api-key=VCLxI1f0Mv8l1IhdYJsSjWdpKAmryPV7`)
+          fetch(`https://api.nytimes.com/svc/books/v3/lists/${searchData}/hardcover-fiction.json?api-key=${process.env.REACT_APP_KEY}`)
           .then( data => {
             if(data.ok){
               return data.json();
@@ -55,7 +55,7 @@ function BookSelection(){
       
     } else{
       try{
-        fetch(`https://api.nytimes.com/svc/books/v3/lists/best-sellers/history.json?${checkedStatus}=${searchData}&api-key=VCLxI1f0Mv8l1IhdYJsSjWdpKAmryPV7`)
+        fetch(`https://api.nytimes.com/svc/books/v3/lists/best-sellers/history.json?${checkedStatus}=${searchData}&api-key=${process.env.REACT_APP_KEY}`)
         .then( data => {
           if(data.ok){
             return data.json();
@@ -114,7 +114,7 @@ function BookSelection(){
           </Modal>
 
 
-          {results.type === '' ? null: results.items.map( bookObj => <CardItem key={bookObj.isbns[0].isbn10} book={bookObj} results={results} callModal={callModal}/>)}
+          {results.type === '' ? null: results.items.map( (bookObj, index) => <CardItem key={index} book={bookObj} results={results} callModal={callModal}/>)}
           </div>
         </div>
       </div>

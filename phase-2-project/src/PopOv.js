@@ -10,7 +10,6 @@ function PopOv({results, callModal}){
   const [commentInput, setComment] = useState('')
   const [btnStates, setStates] = useState([])
   const [bookInfo, setBookInfo] = useState({title: '', author: '', publisher: '', image: ''})
-  // console.log(btnStates)
 
   const popover = (
     <Popover id="popover-basic">
