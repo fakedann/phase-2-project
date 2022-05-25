@@ -15,6 +15,10 @@ function BookSelection(){
   const [show, setShow] = useState(false);
   const [condModal, setModal] = useState(true)
   const [resultTitle, setTitle] = useState('')
+
+  if(results.items.length > 2){
+    console.log(results.items[0].isbns[0].isbn10)
+  }
   
 
   function fetchInput(searchData, checkedStatus){
@@ -98,7 +102,7 @@ function BookSelection(){
 
           <BookSearch fetchInput={fetchInput}/>
           {resultTitle !== '' ? <h5 id="srchBook" >SEARCH RESULTS FOR: {resultTitle}</h5>: null}
-          {results.items.length === 0 ? <h6>NO RESULTS</h6>: null}
+          {results.items.length === 0 && resultTitle !== ''? <h6>NO RESULTS</h6>: null}
 
               <Modal
             show={show}
@@ -116,7 +120,7 @@ function BookSelection(){
           </Modal>
 
 
-          {results.type === '' ? null: results.items.map( bookObj => <CardItem key={uuidv4()} book={bookObj} results={results} callModal={callModal}/>)}
+          {results.type === '' ? null: results.items.map( bookObj => <CardItem key={bookObj.isbns[0].isbn10} book={bookObj} results={results} callModal={callModal}/>)}
           </div>
         </div>
       </div>

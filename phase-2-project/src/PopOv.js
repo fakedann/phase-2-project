@@ -54,6 +54,8 @@ function PopOv({results, callModal}){
       setStates( btnStates.filter( btnObj => btnObj !== e.target.innerText))
     }
   }
+
+
   
   function handleBtnSubmit(e) {
     e.preventDefault()
