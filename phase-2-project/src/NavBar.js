@@ -13,11 +13,11 @@ function NavBar(){
         <LinkContainer to="/">
           <Nav.Link>Home</Nav.Link>
         </LinkContainer>
-        <LinkContainer to="/book-selection">
-          <Nav.Link>Book Selection</Nav.Link>
+        <LinkContainer to="/nyt-search">
+          <Nav.Link>NYT's Search</Nav.Link>
         </LinkContainer>
-        <LinkContainer to="/review-book">
-          <Nav.Link>Review a Book</Nav.Link>
+        <LinkContainer to="/discover">
+          <Nav.Link>DISCOVER</Nav.Link>
         </LinkContainer>
       </Nav>
       </Container>

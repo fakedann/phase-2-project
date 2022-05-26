@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import CardItem from "./CardItem";
 import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
 import BookSearch from "./BookSearch";
-import TableItem from "./TableItem";
+import { v4 as uuidv4 } from 'uuid';
+import * as moment from 'moment';
 
 function BookSelection(){
 
@@ -14,45 +14,48 @@ function BookSelection(){
 
   const [show, setShow] = useState(false);
   const [condModal, setModal] = useState(true)
-  console.log(results)
+  const [resultTitle, setTitle] = useState('')
+
 
   function fetchInput(searchData, checkedStatus){
-    
+
+    if(searchData === ''){
+      callModal(false)
+    }else{
+      setTitle(searchData)
     if(checkedStatus === 'date'){
-      try{
-        fetch(`https://api.nytimes.com/svc/books/v3/lists/${searchData}/hardcover-fiction.json?api-key=VCLxI1f0Mv8l1IhdYJsSjWdpKAmryPV7`)
-        .then( data => {
-          if(data.ok){
-            return data.json();
-          }  
-          else{
-            throw new Error("Status code error :" + data.status)
-          } 
-        } )
-        .then( data => {
-          console.log(data)
-          setShow(true)
-          setModal(true)
-          setResults({['type']: 'card', ['items']: [...data.results.books]})
-          setTimeout(() => {
-            setShow(false)
-          }, 1000);
-          
-          
-        } )
-        .catch( (err) => {
-          console.log(err)
-          setShow(true)
-          setModal(false)
-          
-        })
-      } catch(e){
-        console.error(e)
+      let validDate = moment(searchData, 'YYYY-MM-DD',true).isValid();
+      if(validDate){
+        try{
+          fetch(`https://api.nytimes.com/svc/books/v3/lists/${searchData}/hardcover-fiction.json?api-key=${process.env.REACT_APP_KEY}`)
+          .then( data => {
+            if(data.ok){
+              return data.json();
+            }  
+            else{
+              throw new Error("Status code error :" + data.status)
+            } 
+          } )
+          .then( data => {
+            setResults({['type']: 'card', ['items']: [...data.results.books]})
+            
+          } )
+          .catch( (err) => {
+            console.log('daddad')
+            setResults({['type']: 'card', ['items']: []})
+            
+          })
+        } catch(e){
+          console.error(e)
+        }
+      }else{
+        setResults({['type']: 'card', ['items']: []})
+        callModal(false)
       }
       
     } else{
       try{
-        fetch(`https://api.nytimes.com/svc/books/v3/lists/best-sellers/history.json?${checkedStatus}=${searchData}&api-key=VCLxI1f0Mv8l1IhdYJsSjWdpKAmryPV7`)
+        fetch(`https://api.nytimes.com/svc/books/v3/lists/best-sellers/history.json?${checkedStatus}=${searchData}&api-key=${process.env.REACT_APP_KEY}`)
         .then( data => {
           if(data.ok){
             return data.json();
@@ -62,34 +65,38 @@ function BookSelection(){
           } 
         } )
         .then( data => {
-          console.log(data)
-          setShow(true)
-          setModal(true)
-          setResults({['type']: 'table', ['items']: [...data.results]})
-          setTimeout(() => {
-            setShow(false)
-          }, 1000);
-          
+          setResults({['type']: 'card', ['items']: [...data.results]})
         } )
         .catch( (err) => {
-          console.log(err)
-          setModal(false)
-          setShow(true)
+          setResults({['type']: 'card', ['items']: []})
         })
       } catch(e){
         console.error(e)
       }
     }
+    }
+
   }
 
+  function callModal(resp){
+    setShow(true)
+    setModal(resp)
+    if(resp === true){
+      setTimeout(() => {
+        setShow(false)
+      }, 2000);
+    }
+  }
   return (
 
     <div id="books">
-      <h1 className="title">Search for our weekly rankings, authors, or publishing companies</h1>
+      <h1 className="title">Search for past weekly rankings, authors, or publishing companies</h1>
         <div id="search-list">
           <div className="search-item">
 
           <BookSearch fetchInput={fetchInput}/>
+          {resultTitle !== '' ? <h5 id="srchBook" >SEARCH RESULTS FOR: {resultTitle}</h5>: null}
+          {results.items.length === 0 && resultTitle !== ''? <h6>NO RESULTS</h6>: null}
 
               <Modal
             show={show}
@@ -98,20 +105,16 @@ function BookSelection(){
             keyboard={false}
           >
             <Modal.Header closeButton>
-              <Modal.Title>Notification!</Modal.Title>
+              <Modal.Title>Notification</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               {condModal ? 'Success!' :'Invalid input. Please, try again.'}
             </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={() => setShow(false)}>
-                Close
-              </Button>
-            </Modal.Footer>
+  
           </Modal>
 
 
-          {results.type === '' ? null: (results.type === 'card' ? results.items.map( bookObj => <CardItem key={bookObj.title} book={bookObj} results={results}/>): <TableItem results={results}/>)}
+          {results.type === '' ? null: results.items.map( (bookObj, index) => <CardItem key={index} book={bookObj} results={results} callModal={callModal}/>)}
           </div>
         </div>
       </div>
