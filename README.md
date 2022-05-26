@@ -6,7 +6,8 @@
 - Showcase the quickness and flexibility of React's library. 
 - Navigate the NYT's extensive book database in order to learn more about specific authors, titles, publishers, etc. 
 - Replicate the experience of a forum where users can express their thoughts regarding their favorite books.
-- Store and manipulate user data by mimicking the use of a backend server.  
+- Store and manipulate user data by mimicking the use of a backend server.
+- Take advantage of Heroku and Netlify's features to deploy middle-size applications and stop relying on local executions.
 
 This project focuses on highlighting React's incredible tools to create single page applications from scratch. In order to cruise through these features, [NYT's Best Seller API was selected.](https://developer.nytimes.com/docs/books-product/1/overview) The application created on this repository will replicate the experience of a forum. Users will be able to see the current week's best sellers, search for specific books, and discover what others are discussing about.
 
@@ -14,33 +15,52 @@ This project focuses on highlighting React's incredible tools to create single p
 
 ### Requirements
 
-The project relies on npm and node.js capabilities. If the user's computer has not installed these components, [follow these instructions to do so. ](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) Additionally, the user [needs to install](https://www.npmjs.com/package/json-server) npm's JSON server. First, locate the folder in which this repository was downloaded.
+**Deployed versions**
+If the user chooses to run this application through the deployed versions, you can acces the [frontend here.](https://phase-2-project-front.herokuapp.com/). If you wish to take a look at the backend, here is a [link.](https://evening-temple-49691.herokuapp.com/books')
 
-Follow these commands:
+
+**Local environment**
+The project relies on npm and node.js capabilities. If an user wishes to run this project locally, they need to [first install these components ](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) if they have not already. Once this step is completed, execute the command **npm start** and the application should start working.
+
+**IF FOR SOME REASON THE PACKAGE.JSON FILE DID NOT INCLUDE BOOTSTRAP, REACT-DOM, UUID, OR MOMENT LIBRARIES, FOLLOW THE STEPS ABOVE TO INSTALL THEM LOCALLY**
+
+This application takes advantage of multiple resources from Bootstrap, so in order to function, the user must also install it in the selected folder. Follow these instructions: https://react-bootstrap.github.io/getting-started/introduction/
+
+Furthermore, the application also relies on React's router **(version 5)** capabilities in order to make the navbar function. Execute this command in the selected folder:
+```sh
+ npm install react-router-dom@5
+```
+
+Additionally, the user needs to install [npm's JSON server](https://www.npmjs.com/package/json-server). It is recommended to run this server in a separate folder/repository. Once you have selected this place, run the following command:
 
 ```sh
-cd path/to/repository
-json-server --watch db.json
+json-server --watch db.json --port 3001
 ```
-If everything worked correctly, you should see the following message: 
+You must do a different port such as 3001 because otherwise the React application might clash with the server's setup. If everything works out correctly, you should see a message like this one: 
 ```  
 \{^_^}/ hi!
 
   Loading db.json
+  Oops, db.json doesn't seem to exist
+  Creating db.json with some default data
+
   Done
 
   Resources
-  http://localhost:3000/posts
-  http://localhost:3000/comments
-  http://localhost:3000/profile
+  http://localhost:3001/posts
+  http://localhost:3001/comments
+  http://localhost:3001/profile
 
   Home
-  http://localhost:3000
+  http://localhost:3001
 
   Type s + enter at any time to create a snapshot of the database
-  Watching...'.
+  Watching...
   ```
-  Now, copy and paste http://localhost:3000/posts in a new tab in order to access the empty database. This is the location where the film information will be stored.
+  Now, copy and paste http://localhost:3001/posts in a new tab in order to access the empty database. This is the location where the books' information will be stored.
+  
+Lastly, the application uses Moment.js and UUID's libraries in order to handle date formatting. Follow this [link to quickly install Moment.js library.](https://momentjs.com/) For UUID, [follow this one.](https://www.npmjs.com/package/uuidv4)
+
 
 ## Usage
 
@@ -71,7 +91,6 @@ Suggestions are welcome in terms of the application's performance or presentatio
 https://developer.nytimes.com/docs/books-product/1/overview
 https://react-bootstrap.github.io/
 https://id.heroku.com/login
-https://www.netlify.com/
 https://flatironschool.com/courses/coding-bootcamp/
 
 ## License
