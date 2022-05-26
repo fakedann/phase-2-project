@@ -15,11 +15,11 @@ This project focuses on highlighting React's incredible tools to create single p
 
 ### Requirements
 
-**Deployed versions**
+**Deployed versions**<br/>
 If the user chooses to run this application through the deployed versions, you can acces the [frontend here.](https://phase-2-project-front.herokuapp.com/). If you wish to take a look at the backend, here is a [link.](https://evening-temple-49691.herokuapp.com/books')
 
 
-**Local environment**
+**Local environment**<br/>
 The project relies on npm and node.js capabilities. If an user wishes to run this project locally, they need to [first install these components ](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) if they have not already. Once this step is completed, execute the command **npm start** and the application should start working.
 
 **IF FOR SOME REASON THE PACKAGE.JSON FILE DID NOT INCLUDE BOOTSTRAP, REACT-DOM, UUID, OR MOMENT LIBRARIES, FOLLOW THE STEPS ABOVE TO INSTALL THEM LOCALLY**
