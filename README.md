@@ -1,5 +1,5 @@
 # Phase-2 Project
-## _NYT'S Book Search Replica_
+## _NYT'S Book Forum_
 
 ## Features
 
